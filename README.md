@@ -1,7 +1,6 @@
-# README
+# SOCIEDAD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Programa de gestión de reservas para sociedades gastronómicas.
 
 Things you may want to cover:
 
