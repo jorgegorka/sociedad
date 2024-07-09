@@ -1,0 +1,15 @@
+mario:
+  account: account
+  name: "mario"
+  username: "mario99"
+  email: "mario@test.com"
+  role: 99
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
+
+regular:
+  account: account
+  name: "regular"
+  username: "regularuser"
+  email: "regular@test.com"
+  role: 0
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>

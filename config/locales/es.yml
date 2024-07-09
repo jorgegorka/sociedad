@@ -1,0 +1,17 @@
+es:
+  sessions:
+    welcome: "Bienvenido."
+    title: "DE PURA CEPA"
+    invalidAttributes: "Valores incorrectos"
+    logInButton: "Iniciar sesión"
+    logIn: "Usuario o email"
+    password: "Contraseña"
+  admin:
+    accounts:
+      created: "Cuenta creada"
+      deleted: "Cuenta eliminada"
+      updated: "Cuenta actualizada"
+    users:
+      created: "Usuario creado"
+      deleted: "Usuario eliminado"
+      updated: "Usuario actualizado"
