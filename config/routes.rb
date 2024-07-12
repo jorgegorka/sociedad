@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: %i[new create]
   resources :password_resets
+  resources :users
+  resources :resources
 end

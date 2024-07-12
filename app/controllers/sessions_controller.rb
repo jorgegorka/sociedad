@@ -6,11 +6,10 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by('email = :login OR username = :login', { login: params[:login] })
 
-    if @user&.authenticate(params[:password])
+    if @user&.authenticate(params[:password]) && @user&.active
       flash[:notice] = t('sessions.welcome')
       Current.user = @user
       Current.account = @user.account
-
     else
       @invalid_credentials = true
       Current.user = nil

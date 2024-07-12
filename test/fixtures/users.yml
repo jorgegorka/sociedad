@@ -8,8 +8,16 @@ mario:
 
 regular:
   account: account
-  name: "regular"
+  name: "regular name"
   username: "regularuser"
   email: "regular@test.com"
   role: 0
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
+
+manager:
+  account: account
+  name: "manager name"
+  username: "manageruser"
+  email: "manager@test.com"
+  role: 9
   password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>

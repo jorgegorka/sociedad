@@ -1,4 +1,4 @@
-class Admin::UsersController < AdminController
+class UsersController < ManagerController
   before_action :find_account
   before_action :find_user, only: %i[edit update destroy]
 
@@ -15,7 +15,7 @@ class Admin::UsersController < AdminController
 
     if @user.save
       notice = t('admin.users.created')
-      redirect_to admin_account_users_path(@account), notice:
+      redirect_to users_path, notice:
     else
       render 'new', status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class Admin::UsersController < AdminController
   def update
     if @user.update(user_params)
       notice = t('admin.users.updated')
-      redirect_to admin_account_users_path(@account), notice:
+      redirect_to users_path, notice:
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class Admin::UsersController < AdminController
 
     notice = t('admin.users.deleted')
 
-    redirect_to admin_account_users_path(@account), notice:
+    redirect_to users_path, notice:
   end
 
   private
@@ -47,7 +47,7 @@ class Admin::UsersController < AdminController
   end
 
   def find_account
-    @account = Account.find params[:account_id]
+    @account = Current.user.account
   end
 
   def find_user

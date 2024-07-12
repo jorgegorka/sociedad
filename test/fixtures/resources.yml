@@ -1,0 +1,4 @@
+resource:
+  account: account
+  name: "resource name"
+  max_capacity: 12

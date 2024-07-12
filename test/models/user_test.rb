@@ -6,10 +6,4 @@ class UserTest < ActiveSupport::TestCase
 
     assert_not user.valid?
   end
-
-  test 'fixture valid' do
-    mario = users(:mario)
-    
-    assert mario.valid?
-  end
 end

@@ -11,7 +11,7 @@ module Accounts
 
       if account.persisted?
         user = account.users.create(username: user_name, email:, password: SecureRandom.hex(24))
-        user.assign_forget_attributes
+        user.enable_reset_password
         NewAccountMailer.notify_user(user.id).deliver_later
         true
       else

@@ -21,9 +21,22 @@ class User < ApplicationRecord
 
   before_save :downcase_attributes
 
-  def assign_forget_attributes
-    self.forget_token = SecureRandom.hex(32)
-    self.forget_expires_at = 4.hours.from_now
+  class << self
+    def validate_reset_values(reset_token)
+      User.where(reset_token:).where('reset_expires_at >= ?', Time.current).first
+    end
+  end
+
+  def enable_reset_password
+    self.reset_token = SecureRandom.hex(32)
+    self.reset_expires_at = 4.hours.from_now
+    save
+  end
+
+  def delete_reset_values
+    self.reset_token = nil
+    self.reset_expires_at = nil
+    save
   end
 
   private
