@@ -1,17 +1,16 @@
 class ResourcesController < ManagerController
-  before_action :find_account
   before_action :find_resource, only: %i[edit update destroy]
 
   def index
-    @resources = @account.resources
+    @resources = Current.account.resources
   end
 
   def new
-    @resource = @account.resources.new
+    @resource = Current.account.resources.new
   end
 
   def create
-    @resource = @account.resources.create resource_params
+    @resource = Current.account.resources.create resource_params
 
     if @resource.save
       notice = t('resources.created')
@@ -44,10 +43,6 @@ class ResourcesController < ManagerController
 
   def resource_params
     params.require(:resource).permit(:name, :max_capacity)
-  end
-
-  def find_account
-    @account = Current.user.account
   end
 
   def find_resource

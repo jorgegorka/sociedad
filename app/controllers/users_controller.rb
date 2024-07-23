@@ -1,17 +1,16 @@
 class UsersController < ManagerController
-  before_action :find_account
   before_action :find_user, only: %i[edit update destroy]
 
   def index
-    @users = @account.users
+    @users = Current.account.users
   end
 
   def new
-    @user = @account.users.new
+    @user = Current.account.users.new
   end
 
   def create
-    @user = @account.users.create user_params
+    @user = Current.account.users.create user_params
 
     if @user.save
       notice = t('admin.users.created')
@@ -46,11 +45,7 @@ class UsersController < ManagerController
     params.require(:user).permit(:name, :username, :email, :password, :active)
   end
 
-  def find_account
-    @account = Current.user.account
-  end
-
   def find_user
-    @user = @account.users.find params[:id]
+    @user = Current.account.users.find params[:id]
   end
 end

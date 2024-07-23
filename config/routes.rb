@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :users
   resources :resources
+  resources :schedule_categories
 end
