@@ -10,5 +10,6 @@ class Booking < ApplicationRecord
 
   def assign_end_on
     self.end_on = start_on if end_on.blank?
+    save
   end
 end
