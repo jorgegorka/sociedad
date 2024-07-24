@@ -1,0 +1,36 @@
+es:
+  admin:
+    accounts:
+      created: "Cuenta creada"
+      deleted: "Cuenta eliminada"
+      updated: "Cuenta actualizada"
+    users:
+      created: "Usuario creado"
+      deleted: "Usuario eliminado"
+      updated: "Usuario actualizado"
+  bookings:
+    created: "Reserva creada"
+    deleted: "Reserva eliminada"
+    updated: "Reserva actualizada"
+  resetPassword:
+    header: "Introduce una nueva contraseña."
+    invalidResetValues: "El token es incorrecto o ha expirado. Por favor, solicita un nuevo cambio de contraseña."
+    passwordConfirmationError: "Por favor, comprueba que las dos contraseñas sean iguales."
+    passwordError: "Por favor, introduce una contraseña válida."
+    passwordUpdated: "Contraseña actualizada. Ya puedes acceder con la nueva contraseña."
+    submit: "Cambiar contraseña"
+  resources:
+    created: "Recurso creado"
+    deleted: "Recurso eliminado"
+    updated: "Recurso actualizado"
+  scheduleCategories:
+    created: "Tipo de horario creado"
+    deleted: "Tipo de horario eliminado"
+    updated: "Tipo de horario actualizado"
+  sessions:
+    welcome: "Bienvenido."
+    title: "DE PURA CEPA"
+    invalidAttributes: "Valores incorrectos"
+    logInButton: "Iniciar sesión"
+    logIn: "Usuario o email"
+    password: "Contraseña"
