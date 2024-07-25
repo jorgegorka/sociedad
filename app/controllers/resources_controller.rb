@@ -42,7 +42,7 @@ class ResourcesController < ManagerController
   private
 
   def resource_params
-    params.require(:resource).permit(:name, :max_capacity)
+    params.require(:resource).permit(:name, :max_capacity, :photo)
   end
 
   def find_resource

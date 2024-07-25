@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   belongs_to :account
 
+  has_many :bookings
+
   validates :username, presence: true, uniqueness: true, length: { in: 3..15 },
                        format: {
                          with: /\A[a-z0-9A-Z]+\z/,
