@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_24_163514) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_25_095257) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -55,6 +55,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_163514) do
     t.datetime "updated_at", null: false
     t.index ["schedule_category_id"], name: "index_bookings_on_schedule_category_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "resource_bookings", force: :cascade do |t|
+    t.integer "resource_id"
+    t.integer "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_resource_bookings_on_booking_id"
+    t.index ["resource_id"], name: "index_resource_bookings_on_resource_id"
   end
 
   create_table "resources", force: :cascade do |t|

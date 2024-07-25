@@ -2,3 +2,8 @@ schedule_category:
   account: account
   name: "mañanas"
   colour: "red"
+
+schedule_category2:
+  account: account
+  name: "tardes"
+  colour: "blue"
