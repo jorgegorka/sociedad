@@ -1,0 +1,40 @@
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  SuggestExtensions: false
+
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+
+Layout/IndentationWidth:
+  Enabled: true
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: space
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: False
+
