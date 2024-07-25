@@ -3,10 +3,12 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     Current.user = users(:manager)
+    Current.account = Current.user.account
   end
 
   test 'should not get index when regular user' do
     Current.user = users(:regular)
+    Current.account = Current.user.account
 
     get users_path
 

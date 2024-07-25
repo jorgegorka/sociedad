@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :users
     end
   end
-
+  resources :bookings
   resources :dashboard, only: :index, controller: 'dashboard'
   resources :sessions, only: %i[new create]
   resources :password_resets

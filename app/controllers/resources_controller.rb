@@ -46,6 +46,6 @@ class ResourcesController < ManagerController
   end
 
   def find_resource
-    @resource = @account.resources.find params[:id]
+    @resource = Current.account.resources.find params[:id]
   end
 end
