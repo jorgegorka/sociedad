@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       flash[:notice] = t('sessions.welcome')
       Current.user = @user
       Current.account = @user.account
+      redirect_to root_path
     else
       @invalid_credentials = true
       Current.user = nil
