@@ -33,6 +33,7 @@ module Bookings
     end
 
     def validate_capacity
+      return if capacity.nil?
       return if resource.max_capacity >= capacity
 
       errors << I18n.t('bookings.errors.invalidCapacity')
@@ -44,10 +45,6 @@ module Bookings
 
     def resource
       @resource ||= user.account.resources.find resource_id
-    end
-
-    def schedule
-      @schedule ||= user.account.schedule_categories.find schedule_category_id
     end
   end
 end

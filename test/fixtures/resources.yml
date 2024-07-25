@@ -2,3 +2,8 @@ resource:
   account: account
   name: "resource name"
   max_capacity: 12
+
+resource2:
+  account: account
+  name: "resource name2"
+  max_capacity: 8
