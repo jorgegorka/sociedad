@@ -8,6 +8,12 @@ es:
       created: "Usuario creado"
       deleted: "Usuario eliminado"
       updated: "Usuario actualizado"
+  buttons:
+    delete: "Borrar"
+    deleteAction:
+      confirmText: "¿ Estás seguro ?"
+      disableText: "Borrando..."
+    edit: "Editar"
   bookings:
     created: "Reserva creada"
     deleted: "Reserva eliminada"
@@ -20,8 +26,12 @@ es:
     passwordUpdated: "Contraseña actualizada. Ya puedes acceder con la nueva contraseña."
     submit: "Cambiar contraseña"
   resources:
+    addFirst: "Añade el primer recurso"
     created: "Recurso creado"
     deleted: "Recurso eliminado"
+    maxCapacity: "Capacidad máxima"
+    name: "Nombre"
+    noResources: "No hay recursos todavía"
     updated: "Recurso actualizado"
   scheduleCategories:
     created: "Tipo de horario creado"
