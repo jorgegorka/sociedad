@@ -4,5 +4,5 @@
   %td{class: td_class.render}
     = resource.max_capacity
   %td{class: td_class.render}
-    = render partial: 'shared/button_edit', destination: edit_resource_path(resource)
-    = render partial: 'shared/button_delete', destination: edit_resource_path(resource)
+    = render partial: 'shared/button_edit', locals:  {destination: edit_resource_path(resource)}
+    = render partial: 'shared/button_delete', locals:  {destination: {model: resource} }

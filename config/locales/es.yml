@@ -15,9 +15,16 @@ es:
       disableText: "Borrando..."
     edit: "Editar"
   bookings:
+    addFirst: "Añade una reserva."
+    noBookings: "No has hecho ninguna reserva."
     created: "Reserva creada"
     deleted: "Reserva eliminada"
+    name: "Nombre"
+    startOn: "Fecha"
+    scheduleCategory: "Tipo de horario"
     updated: "Reserva actualizada"
+  formErrors:
+    pleaseReview: "Por favor, resvise los errores."
   resetPassword:
     header: "Introduce una nueva contraseña."
     invalidResetValues: "El token es incorrecto o ha expirado. Por favor, solicita un nuevo cambio de contraseña."
@@ -32,10 +39,17 @@ es:
     maxCapacity: "Capacidad máxima"
     name: "Nombre"
     noResources: "No hay recursos todavía"
+    title: "Resources"
     updated: "Recurso actualizado"
   scheduleCategories:
+    addFirst: "Añade la primera categoría"
     created: "Tipo de horario creado"
+    colour: "Color"
     deleted: "Tipo de horario eliminado"
+    icon: "Icono"
+    name: "Nombre"
+    noCategories: "No hay categorías todavía"
+    title: "Categorías"
     updated: "Tipo de horario actualizado"
   sessions:
     welcome: "Bienvenido."
@@ -44,3 +58,8 @@ es:
     logInButton: "Iniciar sesión"
     logIn: "Usuario o email"
     password: "Contraseña"
+  users:
+    name: "Nombre"
+    username: "Usuario"
+    email: "Email"
+    title: "Usuarios"

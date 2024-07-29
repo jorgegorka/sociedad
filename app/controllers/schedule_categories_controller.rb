@@ -41,11 +41,11 @@ class ScheduleCategoriesController < ManagerController
 
   private
 
-  def schedule_category_params
-    params.require(:schedule_category).permit(:name, :icon, :colour)
-  end
+    def schedule_category_params
+      params.require(:schedule_category).permit(:name, :icon, :colour)
+    end
 
-  def find_schedule_category
-    @schedule_category = @account.schedule_categories.find params[:id]
-  end
+    def find_schedule_category
+      @schedule_category = Current.account.schedule_categories.find params[:id]
+    end
 end
