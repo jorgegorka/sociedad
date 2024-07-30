@@ -16,7 +16,7 @@
         = render partial: 'schedule_categories/schedule_category', collection: @schedule_categories
 - else
   .mt-6
-    = render partial: 'shared/notification', locals:  {title: t('scheduleCategories.noCategories')} do
+    = render 'shared/notification', {title: t('scheduleCategories.noCategories')} do
       .mt-4
         .-mx-2.flex{class: "-my-1.5"}
           = link_to t('scheduleCategories.addFirst'), new_schedule_category_path, class: "px-2 py-1.5 rounded-md text-sm leading-5 font-medium text-blue-800 hover:bg-blue-100 focus:outline-none focus:bg-blue-100 transition ease-in-out duration-150", target: '_top'
