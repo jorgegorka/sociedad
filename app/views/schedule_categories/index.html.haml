@@ -1,3 +1,5 @@
+= render 'shared/header', title: t('scheduleCategories.title') do
+  = render 'shared/button_new',  destination: new_schedule_category_path, title: t('scheduleCategories.newTitle')
 - if @schedule_categories.any?
   .mt-6.p-6.bg-white.shadow.sm:rounded-lg
     %table.mt-6.min-w-full.table-stripped

@@ -1,3 +1,5 @@
+= render 'shared/header', title: t('resources.title') do
+  = render 'shared/button_new',  destination: new_resource_path, title: t('resources.newTitle')
 - if @resources.any?
   .mt-6.p-6.bg-white.shadow.sm:rounded-lg
     %table.mt-6.min-w-full.table-stripped

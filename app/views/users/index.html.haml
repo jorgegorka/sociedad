@@ -1,3 +1,5 @@
+= render 'shared/header', title: t('users.title') do
+  = render 'shared/button_new',  destination: new_user_path, title: t('users.newTitle')
 .mt-6.p-6.bg-white.shadow.sm:rounded-lg
   %table.mt-6.min-w-full.table-stripped
     %thead

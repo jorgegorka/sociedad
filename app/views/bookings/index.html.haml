@@ -1,3 +1,5 @@
+= render 'shared/header', title: t('bookings.title') do
+  = render 'shared/button_new',  destination: new_booking_path, title: t('bookings.newTitle')
 - if @bookings.any?
   .mt-6.p-6.bg-white.shadow.sm:rounded-lg
     %table.mt-6.min-w-full.table-stripped
