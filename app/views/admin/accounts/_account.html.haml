@@ -1,0 +1,8 @@
+%tr
+  %td{class: td_class.render}
+    = account.name
+  %td{class: td_class.render}
+    = account.email
+  %td{class: td_class.render}
+    = render partial: 'shared/button_edit', locals:  {destination: edit_admin_account_path(account)}
+    = render partial: 'shared/button_delete', locals:  {destination: {model: [:admin, account]} }

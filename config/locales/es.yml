@@ -3,6 +3,10 @@ es:
     accounts:
       created: "Cuenta creada"
       deleted: "Cuenta eliminada"
+      email: "Email"
+      managerName: "Nombre del administrador"
+      name: "Nombre"
+      title: "Cuentas"
       updated: "Cuenta actualizada"
     users:
       created: "Usuario creado"
