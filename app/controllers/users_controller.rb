@@ -13,10 +13,10 @@ class UsersController < ManagerController
     @user = Current.account.users.create user_params
 
     if @user.save
-      notice = t('admin.users.created')
+      notice = t("admin.users.created")
       redirect_to users_path, notice:
     else
-      render 'new', status: :unprocessable_entity
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -24,28 +24,28 @@ class UsersController < ManagerController
 
   def update
     if @user.update(user_params)
-      notice = t('admin.users.updated')
+      notice = t("admin.users.updated")
       redirect_to users_path, notice:
     else
-      render 'edit', status: :unprocessable_entity
+      render "edit", status: :unprocessable_entity
     end
   end
 
   def destroy
     @user.destroy
 
-    notice = t('admin.users.deleted')
+    notice = t("admin.users.deleted")
 
     redirect_to users_path, notice:
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :username, :email, :password, :active)
-  end
+    def user_params
+      params.require(:user).permit(:name, :username, :email, :password, :active)
+    end
 
-  def find_user
-    @user = Current.account.users.find params[:id]
-  end
+    def find_user
+      @user = Current.account.users.find params[:id]
+    end
 end
