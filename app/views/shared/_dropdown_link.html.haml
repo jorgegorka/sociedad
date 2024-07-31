@@ -1,0 +1,4 @@
+- if link[:method] == :delete
+  = button_to link[:name], link[:link], class: (link[:selected] ? 'bg-gray-50 text-gray-900' : 'text-gray-700')  + " block px-4 py-2 text-sm hover:bg-gray-100", method: :delete
+- else
+  = link_to link[:name], link[:link], class: (link[:selected] ? 'bg-gray-50 text-gray-900' : 'text-gray-700')  + " block px-4 py-2 text-sm hover:bg-gray-100", method: link[:method] || :get, role:"menuitem", tabindex:"-1"

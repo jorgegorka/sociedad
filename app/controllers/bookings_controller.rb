@@ -1,20 +1,21 @@
 class BookingsController < LoggedController
   before_action :find_booking, only: %i[edit update destroy]
+  before_action :find_schedule_categories, only: %i[new create edit update]
+  before_action :find_resources, only: %i[new create edit update]
 
   def index
     @bookings = Current.user.bookings
   end
 
   def new
-    @booking = Current.user.bookings.new
+    @booking = Current.user.bookings.new(start_on: Date.current)
   end
 
   def create
-    @booking = Current.user.bookings.create booking_params
+    @booking = Current.user.bookings.build booking_params
 
-    if @booking.save
-      notice = t("booking.created")
-      redirect_to bookings_path, notice:
+    if @valid_selection && @booking.save
+      redirect_to bookings_path, notice: t("booking.created")
     else
       render "new", status: :unprocessable_entity
     end
@@ -24,8 +25,7 @@ class BookingsController < LoggedController
 
   def update
     if @booking.update(booking_params)
-      notice = t("bookings.updated")
-      redirect_to bookings_path, notice:
+      redirect_to bookings_path, notice: t("bookings.updated")
     else
       render "edit", status: :unprocessable_entity
     end
@@ -34,9 +34,10 @@ class BookingsController < LoggedController
   def destroy
     @booking.destroy
 
-    notice = t("booking.deleted")
+    redirect_to bookings_path, notice: t("booking.deleted")
+  end
 
-    redirect_to bookings_path, notice:
+  def check
   end
 
   private
@@ -47,5 +48,18 @@ class BookingsController < LoggedController
 
     def find_booking
       @booking = Current.user.bookings.find params[:id]
+    end
+
+    def find_schedule_categories
+      @schedule_categories = Current.account.schedule_categories.pluck(:id, :name)
+    end
+
+    def find_resources
+      @resources = Current.account.resources
+        .includes(:resource_bookings).order(max_capacity: :desc)
+    end
+
+    def available_resources
+      @available_resources = Bookings::AvailableResources.new(Current.user.id, @booking.start_on, @booking.schedule_category_id).call
     end
 end

@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardController < LoggedController
   def index
   end
 end

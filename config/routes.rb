@@ -5,7 +5,11 @@ Rails.application.routes.draw do
       resources :users
     end
   end
-  resources :bookings
+  resources :bookings do
+    collection do
+      post :check
+    end
+  end
   resources :dashboard, only: :index, controller: "dashboard"
   resources :sessions, only: %i[new create destroy]
   resources :password_resets

@@ -1,1 +1,7 @@
-
+= tw_form_with model: @booking, data: { controller: :booking } do |f|
+  = f.label :start_on
+  = f.date_input :start_on, data: { booking_target: 'startOn', action: 'change->booking#update' }
+  = f.label :schedule_category_id
+  = f.collection_select_input :schedule_category_id, @schedule_categories, :first, :last, {}, { data: { booking_target: 'scheduleCategoryId', action: 'change->booking#update' } }
+  #resources-list.grid.grid-cols-1.sm:grid-cols-3.gap-6
+  = f.submit 'Submit'

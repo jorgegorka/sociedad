@@ -15,6 +15,7 @@ es:
       newTitle: "Nuevo usuario"
       title: "Usuarios"
       updated: "Usuario actualizado"
+      logOut: "Cerrar sesión"
   buttons:
     delete: "Borrar"
     deleteAction:
