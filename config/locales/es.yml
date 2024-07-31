@@ -30,6 +30,7 @@ es:
     newTitle: "Nueva reserva"
     startOn: "Fecha"
     scheduleCategory: "Horario"
+    title: "Bookings"
     updated: "Reserva actualizada"
   formErrors:
     pleaseReview: "Por favor, resvise los errores."
@@ -48,7 +49,7 @@ es:
     name: "Nombre"
     newTitle: "Nuevo recurso"
     noResources: "No hay recursos todavía"
-    title: "Resources"
+    title: "Recursos"
     updated: "Recurso actualizado"
   scheduleCategories:
     addFirst: "Añade el primer horario"

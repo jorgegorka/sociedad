@@ -1,11 +1,4 @@
 en:
-  sessions:
-    welcome: "Welcome."
-    title: "DE PURA CEPA"
-    invalidAttributes: "Invalid attributes"
-    logInButton: "Log in"
-    logIn: "Username or email"
-    password: "Password"
   admin:
     accounts:
       created: "Account created"
@@ -15,3 +8,62 @@ en:
       created: "User created"
       deleted: "User deleted"
       updated: "User updated"
+    buttons:
+    delete: "Delete"
+    deleteAction:
+      confirmText: "Are you sure ?"
+      disableText: "Deleting..."
+    edit: "Edit"
+  bookings:
+    addFirst: "Add first booking."
+    noBookings: "There is no bookings yet"
+    created: "Booking created"
+    deleted: "Booking deleted"
+    name: "Name"
+    newTitle: "New booking"
+    startOn: "Start on"
+    scheduleCategory: "Schedule"
+    updated: "Booking updated"
+  formErrors:
+    pleaseReview: "Please, check errors."
+  resetPassword:
+    header: "Introduce new password."
+    invalidResetValues: "Token is incorrect or expired. Please, request a new password change."
+    passwordConfirmationError: "Please, check both passwords are the same"
+    passwordError: "Please, introduce a valid password."
+    passwordUpdated: "Password updated"
+    submit: "Change password"
+  resources:
+    addFirst: "Add first resource"
+    created: "Resource created"
+    deleted: "Resource deleted"
+    maxCapacity: "Max capacity"
+    name: "Name"
+    newTitle: "New resource"
+    noResources: "There is no resources yet"
+    title: "Resources"
+    updated: "Resource updated"
+  scheduleCategories:
+    addFirst: "Add first schedule"
+    created: "Schedule created"
+    colour: "Colour"
+    deleted: "Schedule deleted"
+    icon: "Icon"
+    name: "Name"
+    newTitle: "New schedule"
+    noCategories: "There is no schedules yet"
+    title: "Schedules"
+    updated: "Schedule updated"
+  sessions:
+    welcome: "Welcome."
+    title: "DE PURA CEPA"
+    invalidAttributes: "Invalid attributes"
+    logInButton: "Log in"
+    logIn: "Username or email"
+    password: "Password"
+  users:
+    email: "Email"
+    name: "Name"
+    newTitle: "New user"
+    username: "User"
+    title: "Users"
