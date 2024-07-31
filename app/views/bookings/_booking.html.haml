@@ -1,0 +1,8 @@
+%tr
+  %td{class: td_class.render}
+    = booking.start_on
+  %td{class: td_class.render}
+    = booking.schedule_category.name
+  %td{class: td_class.render}
+    = render partial: 'shared/button_edit', locals:  {destination: edit_booking_path(booking)}
+    = render partial: 'shared/button_delete', locals:  {destination: {model: booking} }

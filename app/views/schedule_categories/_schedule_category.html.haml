@@ -1,0 +1,10 @@
+%tr
+  %td{class: td_class.render}
+    = schedule_category.name
+  %td{class: td_class.render}
+    = schedule_category.icon
+  %td{class: td_class.render}
+    = schedule_category.colour
+  %td{class: td_class.render}
+    = render partial: 'shared/button_edit', locals:  {destination: edit_schedule_category_path(schedule_category)}
+    = render partial: 'shared/button_delete', locals:  {destination: {model: schedule_category} }
