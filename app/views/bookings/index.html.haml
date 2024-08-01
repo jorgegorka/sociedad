@@ -1,4 +1,6 @@
 = render 'shared/header', title: t('bookings.title') do
+  = link_to 'adios', bookings_path(month: @month_number.to_i - 1)  
+  = link_to 'hola', bookings_path(month: @month_number.to_i + 1)
   = render 'shared/button_new',  destination: new_booking_path, title: t('bookings.newTitle')
 - if @bookings.any?
   .mt-6.p-6.bg-white.shadow.sm:rounded-lg

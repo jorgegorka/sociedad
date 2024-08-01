@@ -9,14 +9,15 @@ module Bookings
     end
 
     def call
+      validate_params
       assign_resources
 
       errors << I18n.t("bookings.errors.noResourcesAvailable") if available_resources.empty?
 
       if errors.empty?
-        available_resources
+        [ available_resources ]
       else
-        []
+        [ [], errors ]
       end
     end
 
@@ -30,6 +31,12 @@ module Bookings
             available_resources << resource
           end
         end
+      end
+
+      def validate_params
+        schedule_category = user.account.schedule_categories.find_by id: schedule_category_id
+        errors  << I18n.t("bookings.errors.invalidDate") if date.to_date < Date.today
+        errors  << I18n.t("bookings.errors.invalidSchedule") unless schedule_category
       end
 
       def user
