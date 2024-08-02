@@ -1,4 +1,8 @@
 = render 'shared/header', title: t('bookings.title') do
+  = link_to bookings_path(month: "0#{@month_number.to_i - 1}"), class: "w-5 h-5" do
+    = image_tag 'icons/left_arrow.svg'
+  = @month_name
+  = link_to (image_tag 'icons/right_arrow.svg'), bookings_path(month: "0#{@month_number.to_i + 1}"), class: "w-5 h-5"
   = render 'shared/button_new',  destination: new_booking_path, title: t('bookings.newTitle')
 - if @bookings.any?
   .mt-6.p-6.bg-white.shadow.sm:rounded-lg

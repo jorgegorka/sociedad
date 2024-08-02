@@ -2,9 +2,10 @@ class BookingsController < LoggedController
   before_action :find_booking, only: %i[edit update destroy]
   before_action :find_schedule_categories, only: %i[new create edit update]
   before_action :find_resources, only: %i[new create edit update]
+  before_action :find_month_number, only: %i[index]
 
   def index
-    @bookings = Current.user.bookings
+    @bookings = Current.user.bookings.where("strftime('%m', start_on) = ?", @month_number).order(:start_on, :schedule_category_id)
   end
 
   def new
@@ -12,9 +13,7 @@ class BookingsController < LoggedController
   end
 
   def create
-    @booking = Current.user.bookings.build booking_params
-
-    if @valid_selection && @booking.save
+    if  Bookings::Creator.new(Current.user.id, params).call
       redirect_to bookings_path, notice: t("booking.created")
     else
       render "new", status: :unprocessable_entity
@@ -38,6 +37,7 @@ class BookingsController < LoggedController
   end
 
   def check
+    available_resources
   end
 
   private
@@ -60,6 +60,13 @@ class BookingsController < LoggedController
     end
 
     def available_resources
-      @available_resources = Bookings::AvailableResources.new(Current.user.id, @booking.start_on, @booking.schedule_category_id).call
+      @available_resources = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
+    end
+
+    def find_month_number
+      date_today = Date.today.strftime("%Y-%m-%d")
+      @month_number = params[:month].present? ? params[:month] : Date.parse(date_today).strftime("%m")
+      @month_number[0] = '' if @month_number == "010" || @month_number == "011" || @month_number == "012"
+      @month_name = I18n.l(Time.now.beginning_of_year + @month_number.to_i.month - 1, format: "%B")
     end
 end
