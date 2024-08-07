@@ -14,6 +14,7 @@ class Admin::AccountsController < AdminController
       notice = t('admin.accounts.created')
       redirect_to admin_accounts_path, notice:
     else
+      @account = Account.new
       render 'new', status: :unprocessable_entity
     end
   end
@@ -39,7 +40,11 @@ class Admin::AccountsController < AdminController
 
   private
 
-  def find_account
-    @account = Account.find params[:id]
-  end
+    def account_params
+      params.require(:account).permit(:name)
+    end
+
+    def find_account
+      @account = Account.find params[:id]
+    end
 end

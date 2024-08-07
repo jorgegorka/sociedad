@@ -4,8 +4,8 @@
       %h3.text-lg.font-medium.leading-6.text-gray-900
         = t 'admin.accounts.title'
     .mt-6.md:col-span-2
-      = tw_form_with model: [:admin, account], class: "px-10 py-4" do |form|
-        = render partial: 'shared/error_messages', locals:  {error_messages: account.errors.full_messages}
+      = tw_form_with model: [:admin, @account], class: "px-10 py-4" do |form|
+        = render partial: 'shared/error_messages', locals:  {error_messages: @account.errors.full_messages}
         = form.text_input :account_name
         = form.text_input :user_name
         = form.text_input :email

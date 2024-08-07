@@ -2,13 +2,11 @@ require 'test_helper'
 
 class ScheduleCategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    Current.user = users(:manager)
-    Current.account = Current.user.account
+    log_in_manager
   end
 
   test 'should not get index when regular user' do
-    Current.user = users(:regular)
-    Current.account = Current.user.account
+    log_in_user
 
     get schedule_categories_path
 
