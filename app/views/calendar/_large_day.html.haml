@@ -1,0 +1,7 @@
+%div{class: "relative py-2 px-3 min-h-24 #{day == Date.current ? "bg-blue-100" : "bg-gray-50 text-gray-500"}"}
+  .flex.justify-between.items-center
+    %time{class: "#{"flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white" if day == Date.current}", datetime: "#{day.to_s}"}
+      = day.day 
+  %ol.mt-2
+    = render partial: 'main/calendar/large_show_event', collection: @results[day.strftime('%Y-%m-%d')], as: :result
+    = turbo_frame_tag "calendar_day_#{day.strftime('%m_%d')}"

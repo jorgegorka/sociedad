@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users
   resources :resources
   resources :schedule_categories
+  resources :calendar, only: %i[index]
 
   root to: "dashboard#index"
   get "/login", to: "sessions#new"

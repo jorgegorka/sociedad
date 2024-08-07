@@ -2,11 +2,11 @@ require 'test_helper'
 
 class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    Current.user = users(:mario)
+    log_in_manager
   end
 
   test 'should not get index when regular user' do
-    Current.user = users(:regular)
+    log_in_user
 
     get admin_accounts_path
 
@@ -26,7 +26,7 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create an account' do
-    post admin_accounts_url, params: { account: { name: 'New account', email: 'newaccount@test.com' } }
+    post admin_accounts_url, params: { account: { account_name: 'New account', email: 'newaccount@test.com', user_name: 'user name' } }
 
     assert_response :redirect
 
@@ -58,7 +58,7 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
 
   private
 
-  def account
-    @account ||= accounts(:account)
-  end
+    def account
+      @account ||= accounts(:account)
+    end
 end

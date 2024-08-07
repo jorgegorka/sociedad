@@ -1,9 +1,9 @@
 module Accounts
   class NewAccount
     def initialize(params)
-      @account_name = params[:account_name]
-      @user_name = params[:user_name]
-      @email = params[:email]
+      @account_name = params[:account][:account_name]
+      @user_name = params[:account][:user_name]
+      @email = params[:account][:email]
     end
 
     def call
@@ -21,6 +21,6 @@ module Accounts
 
     private
 
-    attr_reader :account_name, :user_name, :email
+      attr_reader :account_name, :user_name, :email
   end
 end

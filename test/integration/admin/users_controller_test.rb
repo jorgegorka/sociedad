@@ -2,11 +2,11 @@ require 'test_helper'
 
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    Current.user = users(:mario)
+    log_in_manager
   end
 
   test 'should not get index when regular user' do
-    Current.user = users(:regular)
+    log_in_user
 
     get admin_account_users_path(account)
 
