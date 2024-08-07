@@ -1,9 +1,7 @@
 class CalendarController < LoggedController
   def index
-    monthly_info = Bookings::Monthly.new(date)
-    # query que agrupe los bookings por schedule cat y que sume los participants, agrupados por dia
-    @weeks = monthly_info.weeks
-    @selected_month = monthly_info.selected_month
+    monthly_info = Bookings::Calendar.call Current.account, date
+    @weeks = monthly_info.each_slice(7)
   end
 
   private

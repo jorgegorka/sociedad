@@ -1,7 +1,7 @@
-require 'test_helper'
+require "test_helper"
 
 class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
-  test 'valid booking' do
+  test "valid booking" do
     booking = user.bookings.create schedule_category:, start_on: Date.today
     booking.resource_bookings.create resource_id: resource.id
 
@@ -12,7 +12,7 @@ class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
                                                      schedule_category2.id).call.first.count
   end
 
-  test 'valid booking only 1 resource' do
+  test "valid booking only 1 resource" do
     booking = user.bookings.create schedule_category:, start_on: Date.today
     booking.resource_bookings.create resource_id: resource.id
 
@@ -23,7 +23,7 @@ class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
                                                      schedule_category2.id).call.first.count
   end
 
-  test 'invalid booking' do
+  test "invalid booking" do
     booking = user.bookings.create schedule_category: schedule_category2, start_on: Date.today
     booking.resource_bookings.create resource_id: resource.id
 
@@ -34,7 +34,7 @@ class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
                                             schedule_category2.id).call.first.empty?
   end
 
-  test 'invalid date' do
+  test "invalid date" do
     booking = user.bookings.create schedule_category:, start_on: Date.today
     booking.resource_bookings.create resource_id: resource.id
 
@@ -45,7 +45,7 @@ class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
                                                      schedule_category2.id).call.last
   end
 
-  test 'invalid schedule id' do
+  test "invalid schedule id" do
     booking = user.bookings.create schedule_category:, start_on: Date.today
     booking.resource_bookings.create resource_id: resource.id
 
