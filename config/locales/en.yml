@@ -26,6 +26,12 @@ en:
     updated: "Booking updated"
   formErrors:
     pleaseReview: "Please, check errors."
+  menu:
+    bookings: "Bookings"
+    calendar: "Calendar"
+    resources: "Resources"
+    scheduleCategories: "Schedules"
+    users: "Users"
   resetPassword:
     header: "Introduce new password."
     invalidResetValues: "Token is incorrect or expired. Please, request a new password change."
@@ -52,6 +58,7 @@ en:
     name: "Name"
     newTitle: "New schedule"
     noCategories: "There is no schedules yet"
+    selectColour: "Select colour"
     title: "Schedules"
     updated: "Schedule updated"
   sessions:

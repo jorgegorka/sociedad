@@ -38,7 +38,7 @@ module Bookings
         .joins(:schedule_category)
         .where(start_on: first_day..last_day)
         .group(:start_on, :schedule_category_id)
-        .select("bookings.start_on, sum(bookings.participants) as participants, schedule_categories.name as schedule_category_name")
+        .select("bookings.start_on, sum(bookings.participants) as participants, schedule_categories.name as schedule_category_name, schedule_categories.colour as schedule_category_colour")
       end
 
       def first_day

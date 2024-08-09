@@ -31,7 +31,7 @@ es:
     newTitle: "Nueva reserva"
     startOn: "Fecha"
     scheduleCategory: "Horario"
-    title: "Bookings"
+    title: "Reservas"
     updated: "Reserva actualizada"
   date:
     month_names:
@@ -50,6 +50,12 @@ es:
 
   formErrors:
     pleaseReview: "Por favor, resvise los errores."
+  menu:
+    bookings: "Reservas"
+    calendar: "Calendario"
+    resources: "Recursos"
+    scheduleCategories: "Horarios"
+    users: "Usuarios"
   resetPassword:
     header: "Introduce una nueva contraseña."
     invalidResetValues: "El token es incorrecto o ha expirado. Por favor, solicita un nuevo cambio de contraseña."
@@ -76,6 +82,7 @@ es:
     name: "Nombre"
     newTitle: "Nuevo horario"
     noCategories: "No hay horarios todavía"
+    selectColour: "Elegir color"
     title: "Horarios"
     updated: "Horario actualizado"
   sessions:
