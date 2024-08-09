@@ -1,2 +1,4 @@
-%li{id: "#{'result_' + result[:id].to_s}"}
-  = render Calendar::Main::ResultComponent.new result: result, employee: @employee 
+%li
+  %p.text-ellipsis.overflow-hidden.whitespace-nowrap
+    = content_tag :span, class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-800" do
+      = "#{result.schedule_category_name} #{result.participants}"
