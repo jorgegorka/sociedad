@@ -1,5 +1,5 @@
-= link_to t('menu.calendar'), calendar_index_path, class: "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-= link_to t('menu.bookings'), bookings_path, class: "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-= link_to t('menu.resources'), resources_path, class: "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-= link_to t('menu.scheduleCategories'), schedule_categories_path, class: "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-= link_to t('menu.users'), users_path, class: "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+= link_to t('menu.calendar'), calendar_index_path, class: selected_option(calendar_index_path)
+= link_to t('menu.bookings'), bookings_path, class: selected_option(bookings_path)
+= link_to t('menu.resources'), resources_path, class: selected_option(resources_path)
+= link_to t('menu.scheduleCategories'), schedule_categories_path, class: selected_option(schedule_categories_path)
+= link_to t('menu.users'), users_path, class: selected_option(users_path)

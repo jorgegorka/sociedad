@@ -1,4 +1,4 @@
-.isolate.grid.w-full.grid-cols-7.grid-rows-6.gap-px.lg:hidden
+.isolate.grid.w-full.grid-cols-7.gap-px.lg:hidden{class: "grid-rows-#{@weeks.size}"}
   = render partial: 'mid_week_row', collection: @weeks, as: :week_row
 .py-10.px-4.sm:px-6.lg:hidden
   %ol.divide-y.divide-gray-100.overflow-hidden.rounded-lg.bg-white.text-sm.shadow.ring-1.ring-black.ring-opacity-5

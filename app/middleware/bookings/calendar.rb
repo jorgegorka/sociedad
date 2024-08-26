@@ -42,7 +42,7 @@ module Bookings
       end
 
       def first_day
-        start_date.beginning_of_month
+        start_date.beginning_of_month.beginning_of_week
       end
 
       def last_day
