@@ -9,7 +9,7 @@ class BookingsController < LoggedController
   end
 
   def new
-    @booking = Current.user.bookings.new(start_on: Date.current)
+    @booking = Current.user.bookings.new start_on: booking_date
   end
 
   def create
@@ -59,6 +59,14 @@ class BookingsController < LoggedController
         .includes(:resource_bookings).order(max_capacity: :desc)
     end
 
+    def booking_date
+      return Date.current if params[:date].blank?
+
+      Date.parse params[:date]
+    rescue
+      Date.current
+    end
+
     def available_resources
       @available_resources = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
     end
@@ -66,7 +74,7 @@ class BookingsController < LoggedController
     def find_month_number
       date_today = Date.today.strftime("%Y-%m-%d")
       @month_number = params[:month].present? ? params[:month] : Date.parse(date_today).strftime("%m")
-      @month_number[0] = '' if @month_number == "010" || @month_number == "011" || @month_number == "012"
+      @month_number[0] = "" if @month_number == "010" || @month_number == "011" || @month_number == "012"
       @month_name = I18n.l(Time.now.beginning_of_year + @month_number.to_i.month - 1, format: "%B")
     end
 end

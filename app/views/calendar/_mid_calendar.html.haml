@@ -1,5 +1,2 @@
-.isolate.grid.w-full.grid-cols-7.gap-px.lg:hidden{class: "grid-rows-#{@weeks.size}"}
+.isolate.grid.w-full.grid-cols-7.gap-1.lg:hidden{class: "grid-rows-#{@weeks.size}"}
   = render partial: 'mid_week_row', collection: @weeks, as: :week_row
-.py-10.px-4.sm:px-6.lg:hidden
-  %ol.divide-y.divide-gray-100.overflow-hidden.rounded-lg.bg-white.text-sm.shadow.ring-1.ring-black.ring-opacity-5
-    = turbo_frame_tag 'calendar_events_mid'
