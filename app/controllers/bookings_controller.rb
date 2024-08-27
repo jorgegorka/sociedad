@@ -37,7 +37,7 @@ class BookingsController < LoggedController
   end
 
   def check
-    available_resources
+    @available_resources, @errors = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
   end
 
   private
@@ -65,10 +65,6 @@ class BookingsController < LoggedController
       Date.parse params[:date]
     rescue
       Date.current
-    end
-
-    def available_resources
-      @available_resources = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
     end
 
     def find_month_number

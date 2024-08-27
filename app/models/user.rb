@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  REGULAR = 'regular'.freeze
-  ADMIN = 'admin'.freeze
-  SUPERADMIN = 'superadmin'.freeze
+  REGULAR = "regular".freeze
+  ADMIN = "admin".freeze
+  SUPERADMIN = "superadmin".freeze
 
   belongs_to :account
 
@@ -19,13 +19,13 @@ class User < ApplicationRecord
     message: :invalid
   }
 
-  enum role: { regular: 0, admin: 9, superadmin: 99 }
+  enum :role, { regular: 0, admin: 9, superadmin: 99 }
 
   before_save :downcase_attributes
 
   class << self
     def validate_reset_values(reset_token)
-      User.where(reset_token:).where('reset_expires_at >= ?', Time.current).first
+      User.where(reset_token:).where("reset_expires_at >= ?", Time.current).first
     end
   end
 
@@ -43,8 +43,8 @@ class User < ApplicationRecord
 
   private
 
-  def downcase_attributes
-    self.username = username.downcase
-    self.email = email&.downcase
-  end
+    def downcase_attributes
+      self.username = username.downcase
+      self.email = email&.downcase
+    end
 end
