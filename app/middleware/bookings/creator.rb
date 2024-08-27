@@ -5,10 +5,11 @@ module Bookings
       @start_on = params[:start_on]
       @schedule_category_id = params[:schedule_category_id]
       @resource_ids = params[:resource_ids]
+      @participants = params[:participants]
     end
 
     def call
-      booking = user.bookings.create(start_on:, schedule_category_id:)
+      booking = user.bookings.create(start_on:, schedule_category_id:, participants:)
 
       if booking.persisted?
         resources.each do |resource|
@@ -22,7 +23,7 @@ module Bookings
 
     private
 
-      attr_reader :start_on, :schedule_category_id, :resource_ids, :user_id
+      attr_reader :start_on, :schedule_category_id, :resource_ids, :user_id, :participants
 
       def resources
         @resources ||= available_resources
