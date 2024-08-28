@@ -8,5 +8,7 @@
         = render partial: 'shared/error_messages', locals:  {error_messages: resource.errors.full_messages}
         = form.text_input :name
         = form.number_input :max_capacity
+        .mt-1
+          = form.file_input :photo
         .mt-8.border-t.border-gray-200.pt-5
           = render partial: 'shared/button', locals:  {cancel_text: t('buttons.cancel'), cancel_url: resources_path, button_text: t('buttons.save')}
