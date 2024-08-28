@@ -1,4 +1,8 @@
 = tw_form_with model: @booking, data: { controller: :booking } do |f|
+  - if @booking.errors.any?
+    .m-4.bg-red-100.text-red-900.rounded
+      = @booking.errors.full_messages.each do |error|
+        = error
   = f.label :start_on
   = f.date_input :start_on, data: { booking_target: 'startOn', action: 'change->booking#update' }
   = f.label :schedule_category_id

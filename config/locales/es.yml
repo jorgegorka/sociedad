@@ -34,20 +34,52 @@ es:
     title: "Reservas"
     updated: "Reserva actualizada"
   date:
+    abbr_day_names:
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
+    abbr_month_names:
+      -
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
+    day_names:
+      - domingo
+      - lunes
+      - martes
+      - miércoles
+      - jueves
+      - viernes
+      - sábado
+    formats:
+      month_name: "%B"
     month_names:
-      1: "Enero"
-      2: "Febrero"
-      3: "Marzo"
-      4: "Abril"
-      5: "Mayo"
-      6: "Junio"
-      7: "Julio"
-      8: "Agosto"
-      9: "Septiembre"
-      10: "Octubre"
-      11: "Noviembre"
-      12: "Diciembre"
-
+      -
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
   formErrors:
     pleaseReview: "Por favor, resvise los errores."
   menu:

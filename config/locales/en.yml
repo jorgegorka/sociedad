@@ -24,6 +24,9 @@ en:
     startOn: "Start on"
     scheduleCategory: "Schedule"
     updated: "Booking updated"
+  date:
+    formats:
+      month_name: "%B"
   formErrors:
     pleaseReview: "Please, check errors."
   menu:

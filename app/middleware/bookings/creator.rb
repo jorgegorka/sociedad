@@ -4,7 +4,7 @@ module Bookings
       @user_id = user_id
       @start_on = params[:start_on]
       @schedule_category_id = params[:schedule_category_id]
-      @resource_ids = params[:resource_ids]
+      @resource_ids = params[:resource_bookings]
       @participants = params[:participants]
     end
 

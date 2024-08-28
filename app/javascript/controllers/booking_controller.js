@@ -17,7 +17,6 @@ export default class extends Controller {
       schedule_category_id: this.scheduleCategoryIdTarget.value,
     };
 
-    console.log(data);
     const resp = await post("/bookings/check", {
       headers: { Accept: "text/vnd.turbo-stream.html" },
       responseKind: "turbo-stream",
