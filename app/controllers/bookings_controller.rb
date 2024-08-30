@@ -9,13 +9,16 @@ class BookingsController < LoggedController
   end
 
   def new
-    @booking = Current.user.bookings.new start_on: booking_date
+    @booking = Current.user.bookings.new start_on: booking_date, schedule_category_id: @schedule_categories.first[0]
+    available_resources
   end
 
   def create
     @booking =  Current.user.bookings.create booking_params
     if @booking.persisted?
       redirect_to bookings_path, notice: t("booking.created")
+    else
+      available_resources
     end
   end
 
@@ -25,6 +28,7 @@ class BookingsController < LoggedController
     if @booking.update(booking_params)
       redirect_to bookings_path, notice: t("bookings.updated")
     else
+      available_resources
       render "edit", status: :unprocessable_entity
     end
   end
@@ -36,7 +40,7 @@ class BookingsController < LoggedController
   end
 
   def check
-    @available_resources, @errors = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
+    available_resources
   end
 
   private
@@ -47,6 +51,22 @@ class BookingsController < LoggedController
 
     def find_booking
       @booking = Current.user.bookings.find params[:id]
+    end
+
+    def available_resources
+      @available_resources, @errors = Bookings::AvailableResources.new(Current.user.id, start_on, schedule_category_id).call
+    end
+
+    def start_on
+      return @booking.start_on if params[:booking].blank? || params[:booking][:start_on].blank?
+
+      params[:booking][:start_on]
+    end
+
+    def schedule_category_id
+      return @booking.schedule_category_id if params[:booking].blank? || params[:booking][:schedule_category_id].blank?
+
+      params[:booking][:schedule_category_id]
     end
 
     def find_schedule_categories

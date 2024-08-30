@@ -1,5 +1,5 @@
 <%= tag.div class: 'm-6', data: { controller: :resources, resources_rid_value: resource_booking.id } do %>
-  <%= tag.input type: 'hidden', name: "booking[resource_bookings_attributes][#{resource_booking.id}][resource_id]", value: "", data: { resources_target: :resourceId } %>
+  <%= tag.input type: 'hidden', name: "booking[resource_bookings_attributes][#{resource_booking.id}][resource_id]", value: selected_resource_booking(params, resource_booking.id), data: { resources_target: :resourceId } %>
   <%= tag.div class: 'relative', data: { action: 'click->resources#toggle' } do %>
     <%= tag.div class: "relative h-72 w-full overflow-hidden rounded-lg", data: { resources_target: :bookingImage } do %>
       <%= image_tag resource_image(resource_booking), class: "h-full w-full object-cover object-center" %>

@@ -6,12 +6,18 @@ export default class extends Controller {
   static values = { rid: Number };
 
   connect() {
-    console.log(this.resourceIdTarget);
+    this.resourceId = 0;
+    if (this.resourceIdTarget.value) {
+      this.resourceId = parseInt(this.resourceIdTarget.value);
+    }
+    if (this.resourceId == this.ridValue) {
+      this.bookingImageTarget.classList.add("border-4", "border-blue-500");
+    }
   }
 
   toggle(_event) {
-    if (this.resourceIdTarget.value == this.ridValue) {
-      this.resourceIdTarget.value = null;
+    if (this.resourceId == this.ridValue) {
+      this.resourceIdTarget.value = "";
       this.bookingImageTarget.classList.remove("border-4", "border-blue-500");
     } else {
       this.resourceIdTarget.value = this.ridValue;
