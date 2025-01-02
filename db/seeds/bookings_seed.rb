@@ -25,35 +25,48 @@ class BookingsSeed
 
       user.bookings.create!(
         start_on: Date.today,
-        schedule_category:
+        schedule_category:,
+        participants: 12
       )
       user.bookings.create!(
         start_on: Date.today + 2,
-        schedule_category: schedule_category1
+        schedule_category: schedule_category1,
+        participants: 8
       )
       user.bookings.create!(
         start_on: Date.today + 2,
-        schedule_category:
+        schedule_category:,
+        participants: 4
       )
       user.bookings.create!(
         start_on: Date.today + 4,
-        schedule_category: schedule_category1
+        schedule_category: schedule_category1,
+        participants: 16
       )
       user.bookings.create!(
         start_on: Date.today + 7,
-        schedule_category:
+        schedule_category:,
+        participants: 20
+      )
+      user.bookings.create!(
+        start_on: Date.today + 7,
+        schedule_category: schedule_category1,
+        participants: 10
       )
       user.bookings.create!(
         start_on: Date.today + 15,
-        schedule_category: schedule_category1
+        schedule_category: schedule_category1,
+        participants: 10
       )
       user.bookings.create!(
         start_on: Date.today + 20,
-        schedule_category: schedule_category1
+        schedule_category: schedule_category1,
+        participants: 15
       )
       user.bookings.create!(
         start_on: Date.today + 33,
-        schedule_category:
+        schedule_category:,
+        participants: 2
       )
     end
 end

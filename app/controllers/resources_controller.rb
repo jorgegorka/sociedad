@@ -13,10 +13,10 @@ class ResourcesController < ManagerController
     @resource = Current.account.resources.create resource_params
 
     if @resource.save
-      notice = t('resources.created')
+      notice = t("resources.created")
       redirect_to resources_path, notice:
     else
-      render 'new', status: :unprocessable_entity
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -24,28 +24,28 @@ class ResourcesController < ManagerController
 
   def update
     if @resource.update(resource_params)
-      notice = t('resources.updated')
+      notice = t("resources.updated")
       redirect_to resources_path, notice:
     else
-      render 'edit', status: :unprocessable_entity
+      render "edit", status: :unprocessable_entity
     end
   end
 
   def destroy
     @resource.destroy
 
-    notice = t('resources.deleted')
+    notice = t("resources.deleted")
 
     redirect_to resources_path, notice:
   end
 
   private
 
-  def resource_params
-    params.require(:resource).permit(:name, :max_capacity, :photo)
-  end
+    def resource_params
+      params.require(:resource).permit(:name, :max_capacity, :photo)
+    end
 
-  def find_resource
-    @resource = Current.account.resources.find params[:id]
-  end
+    def find_resource
+      @resource = Current.account.resources.find params[:id]
+    end
 end

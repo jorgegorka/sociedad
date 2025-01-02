@@ -10,14 +10,14 @@ Rails.application.routes.draw do
       post :check
     end
   end
-  resources :dashboard, only: :index, controller: "dashboard"
   resources :sessions, only: %i[new create destroy]
   resources :password_resets
   resources :users
   resources :resources
   resources :schedule_categories
   resources :calendar, only: %i[index]
+  resources :calendar_events, only: %i[index]
 
-  root to: "dashboard#index"
+  root to: "calendar#index"
   get "/login", to: "sessions#new"
 end

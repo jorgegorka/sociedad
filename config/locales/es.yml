@@ -31,25 +31,63 @@ es:
     newTitle: "Nueva reserva"
     startOn: "Fecha"
     scheduleCategory: "Horario"
-    title: "Bookings"
+    title: "Reservas"
     updated: "Reserva actualizada"
   date:
+    abbr_day_names:
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
+    abbr_month_names:
+      -
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
+    day_names:
+      - domingo
+      - lunes
+      - martes
+      - miércoles
+      - jueves
+      - viernes
+      - sábado
+    formats:
+      month_name: "%B"
     month_names:
-      1: "Enero"
-      2: "Febrero"
-      3: "Marzo"
-      4: "Abril"
-      5: "Mayo"
-      6: "Junio"
-      7: "Julio"
-      8: "Agosto"
-      9: "Septiembre"
-      10: "Octubre"
-      11: "Noviembre"
-      12: "Diciembre"
-
+      -
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
   formErrors:
     pleaseReview: "Por favor, resvise los errores."
+  menu:
+    bookings: "Reservas"
+    calendar: "Calendario"
+    resources: "Recursos"
+    scheduleCategories: "Horarios"
+    users: "Usuarios"
   resetPassword:
     header: "Introduce una nueva contraseña."
     invalidResetValues: "El token es incorrecto o ha expirado. Por favor, solicita un nuevo cambio de contraseña."
@@ -76,6 +114,7 @@ es:
     name: "Nombre"
     newTitle: "Nuevo horario"
     noCategories: "No hay horarios todavía"
+    selectColour: "Elegir color"
     title: "Horarios"
     updated: "Horario actualizado"
   sessions:

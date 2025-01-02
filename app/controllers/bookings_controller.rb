@@ -2,21 +2,23 @@ class BookingsController < LoggedController
   before_action :find_booking, only: %i[edit update destroy]
   before_action :find_schedule_categories, only: %i[new create edit update]
   before_action :find_resources, only: %i[new create edit update]
-  before_action :find_month_number, only: %i[index]
+  before_action :find_date, only: %i[index]
 
   def index
-    @bookings = Current.user.bookings.where("strftime('%m', start_on) = ?", @month_number).order(:start_on, :schedule_category_id)
+    @bookings = Current.user.bookings.where(start_on: @start_date..@end_date).order(:start_on, :schedule_category_id)
   end
 
   def new
-    @booking = Current.user.bookings.new(start_on: Date.current)
+    @booking = Current.user.bookings.new start_on: booking_date, schedule_category_id: @schedule_categories.first[0]
+    available_resources
   end
 
   def create
-    if  Bookings::Creator.new(Current.user.id, params).call
+    @booking =  Current.user.bookings.create booking_params
+    if @booking.persisted?
       redirect_to bookings_path, notice: t("booking.created")
     else
-      render "new", status: :unprocessable_entity
+      available_resources
     end
   end
 
@@ -26,6 +28,7 @@ class BookingsController < LoggedController
     if @booking.update(booking_params)
       redirect_to bookings_path, notice: t("bookings.updated")
     else
+      available_resources
       render "edit", status: :unprocessable_entity
     end
   end
@@ -43,11 +46,27 @@ class BookingsController < LoggedController
   private
 
     def booking_params
-      params.require(:booking).permit(:start_on, :schedule_category_id)
+      params.require(:booking).permit(:start_on, :schedule_category_id, :participants, resource_bookings_attributes: %i[resource_id])
     end
 
     def find_booking
       @booking = Current.user.bookings.find params[:id]
+    end
+
+    def available_resources
+      @available_resources, @errors = Bookings::AvailableResources.new(Current.user.id, start_on, schedule_category_id).call
+    end
+
+    def start_on
+      return @booking.start_on if params[:booking].blank? || params[:booking][:start_on].blank?
+
+      params[:booking][:start_on]
+    end
+
+    def schedule_category_id
+      return @booking.schedule_category_id if params[:booking].blank? || params[:booking][:schedule_category_id].blank?
+
+      params[:booking][:schedule_category_id]
     end
 
     def find_schedule_categories
@@ -59,14 +78,16 @@ class BookingsController < LoggedController
         .includes(:resource_bookings).order(max_capacity: :desc)
     end
 
-    def available_resources
-      @available_resources = Bookings::AvailableResources.new(Current.user.id, params[:start_on], params[:schedule_category_id]).call
+    def booking_date
+      return Date.current if params[:date].blank?
+
+      Date.parse params[:date]
+    rescue
+      Date.current
     end
 
-    def find_month_number
-      date_today = Date.today.strftime("%Y-%m-%d")
-      @month_number = params[:month].present? ? params[:month] : Date.parse(date_today).strftime("%m")
-      @month_number[0] = '' if @month_number == "010" || @month_number == "011" || @month_number == "012"
-      @month_name = I18n.l(Time.now.beginning_of_year + @month_number.to_i.month - 1, format: "%B")
+    def find_date
+      @start_date = booking_date.beginning_of_month
+      @end_date = booking_date.end_of_month
     end
 end

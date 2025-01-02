@@ -14,11 +14,7 @@ module Bookings
 
       errors << I18n.t("bookings.errors.noResourcesAvailable") if available_resources.empty?
 
-      if errors.empty?
-        [ available_resources ]
-      else
-        [ [], errors ]
-      end
+      [ available_resources, errors ]
     end
 
     private

@@ -7,7 +7,6 @@
       = tw_form_with model: schedule_category, class: "px-10 py-4" do |form|
         = render partial: 'shared/error_messages', locals:  {error_messages: schedule_category.errors.full_messages}
         = form.text_input :name
-        = form.text_input :icon
-        = form.text_input :colour
+        = render partial: 'schedule_categories/colour_picker', locals: { schedule_category: }
         .mt-8.border-t.border-gray-200.pt-5
           = render partial: 'shared/button', locals:  {cancel_text: t('buttons.cancel'), cancel_url: schedule_categories_path, button_text: t('buttons.save')}

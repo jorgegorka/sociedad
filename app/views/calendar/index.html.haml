@@ -7,7 +7,7 @@
       M
       %span.sr-only.sm:not-sr-only> ar
     .bg-white.py-2
-      M
+      X
       %span.sr-only.sm:not-sr-only> ie
     .bg-white.py-2
       J
@@ -23,3 +23,5 @@
       %span.sr-only.sm:not-sr-only> om
   = render 'calendar/large_calendar'
   = render 'calendar/mid_calendar'
+%ol.mt-10.divide-y.divide-gray-100.overflow-hidden.rounded-lg.bg-white.text-sm
+  = turbo_frame_tag 'calendar_events_mid'

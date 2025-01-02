@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Bookings::CreatorTest < ActiveSupport::TestCase
   test 'create booking and resource bookings' do
-    params = { start_on: Date.today, schedule_category_id: schedule_category.id, resource_ids: }
+    params = { start_on: Date.today, schedule_category_id: schedule_category.id, resource_ids:, participants: 10 }
 
     assert_difference 'ResourceBooking.count', 2 do
       assert_difference 'user.bookings.count', 1 do
