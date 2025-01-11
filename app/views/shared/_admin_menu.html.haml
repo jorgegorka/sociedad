@@ -1,0 +1,6 @@
+= link_to t('menu.calendar'), calendar_index_path, class: selected_option(calendar_index_path)
+= link_to t('menu.bookings'), bookings_path, class: selected_option(bookings_path)
+= link_to t('menu.resources'), resources_path, class: selected_option(resources_path)
+= link_to t('menu.scheduleCategories'), schedule_categories_path, class: selected_option(schedule_categories_path)
+= link_to t('menu.users'), users_path, class: selected_option(users_path)
+= button_to t('menu.logOut'), session_path(Current.user), method: :delete, form: { class: "inline-flex items-center py-2 text-sm font-medium text-gray-700 hover:border-b-2 hover:border-indigo-500 hover:text-gray-900" }

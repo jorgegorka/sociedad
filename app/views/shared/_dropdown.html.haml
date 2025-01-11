@@ -1,0 +1,7 @@
+.flex.ml-4.items-center{"data-action" => "keyup@window->dropdown#closeWithEsc", "data-controller" => "dropdown"}
+  .relative
+    %button#menu-button.flex.items-center.bg-white.py-2.pl-3.pr-2.text-sm.font-medium.text-gray-700.shadow-sm.hover:bg-gray-50{"aria-expanded" => "false", "aria-haspopup" => "true", "data-action" => "click->dropdown#toggle click@window->dropdown#hide", "data-dropdown-target" => "dropdownButton", type: "button"}
+      %img.h-8.w-8.rounded-full{ src:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" }
+    .hidden.z-20.focus:outline-none.absolute.right-0.mt-3.w-36.origin-top-right.overflow-hidden.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5{"aria-labelledby" => "menu-button", "aria-orientation" => "vertical", "data-dropdown-target" => "dropdownOptions", "data-transition-enter-end" => "transform opacity-100 scale-100", "data-transition-enter-start" => "transform opacity-0 scale-95", "data-transition-leave" => "transition ease-in duration-75", "data-transition-leave-end" => "transform opacity-0 scale-95", "data-transition-leave-start" => "transform opacity-100 scale-100", role: "menu", tabindex: "-1"}
+      .py-1{role: "none"}
+        = render partial: 'shared/dropdown_link', collection: links, as: :link

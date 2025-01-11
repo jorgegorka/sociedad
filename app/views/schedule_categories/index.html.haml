@@ -1,0 +1,20 @@
+= render 'shared/header', title: t('scheduleCategories.title') do
+  = render 'shared/button_new',  destination: new_schedule_category_path, title: t('scheduleCategories.newTitle')
+- if @schedule_categories.any?
+  .mt-6.p-6.bg-white.shadow.sm:rounded-lg
+    %table.mt-6.min-w-full.table-stripped
+      %thead
+        %tr
+          %th{class: th_class.render}
+            = t 'scheduleCategories.name'
+          %th{class: th_class.render}
+            = t 'scheduleCategories.colour'
+          %th{class: th_class.render}
+      %tbody
+        = render partial: 'schedule_categories/schedule_category', collection: @schedule_categories
+- else
+  .mt-6
+    = render 'shared/notification', {title: t('scheduleCategories.noCategories')} do
+      .mt-4
+        .-mx-2.flex{class: "-my-1.5"}
+          = link_to t('scheduleCategories.addFirst'), new_schedule_category_path, class: "px-2 py-1.5 rounded-md text-sm leading-5 font-medium text-blue-800 hover:bg-blue-100 focus:outline-none focus:bg-blue-100 transition ease-in-out duration-150", target: '_top'

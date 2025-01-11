@@ -1,0 +1,13 @@
+= render 'shared/header', title: t('admin.accounts.title') do
+  = render 'shared/button_new',  destination: new_admin_account_path, title: t('admin.accounts.newTitle')
+.mt-6.p-6.bg-white.shadow.sm:rounded-lg
+  %table.mt-6.min-w-full.table-stripped
+    %thead
+      %tr
+        %th{class: th_class.render}
+          = t 'admin.accounts.name'
+        %th{class: th_class.render}
+          = t 'admin.accounts.email'
+        %th{class: th_class.render}
+    %tbody
+      = render partial: 'admin/accounts/account', collection: @accounts
