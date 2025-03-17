@@ -5,6 +5,9 @@ es:
         start_on: "Fecha"
         schedule_category_id: "Horario"
         participants: "Comensales"
+      customAttributes:
+        name: "Nombre"
+        block_on_schedule: "Bloquear (permitir solo una reserva por día y horario)"
       user:
         name: "Nombre"
         username: "Nombre usuario"

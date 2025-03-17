@@ -1,5 +1,17 @@
 es:
   admin:
+    customAttributes:
+      addFirst: "Añade el primer atributo adicional"
+      created: "Atributo adicional creado"
+      deleted: "Atributo adicional eliminado"
+      block: "Bloquear"
+      false1: "No"
+      name: "Nombre"
+      newTitle: "Nuevo atributo adicional"
+      noCustomAttributes: "No hay atributos adicionales todavía"
+      title: "Atributos adicionales"
+      true1: "Sí"
+      updated: "Atributo adicional actualizado"
     resources:
       addFirst: "Añade el primer recurso"
       created: "Recurso creado"
@@ -136,6 +148,7 @@ es:
   menu:
     bookings: "Reservas"
     calendar: "Calendario"
+    customAttributes: "Atributo adicional"
     resources: "Recursos"
     scheduleCategories: "Horarios"
     users: "Usuarios"

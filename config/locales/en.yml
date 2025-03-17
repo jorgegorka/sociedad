@@ -1,5 +1,17 @@
 en:
   admin:
+    customAttributes:
+      addFirst: "Add first custom attribute"
+      created: "Custom attribute created"
+      deleted: "Custom attribute deleted"
+      block: "Block"
+      fale1: "False"
+      name: "Name"
+      newTitle: "New custom attribute"
+      noCustomAttributes: "There is no custom attributes yet"
+      title: "Custom attributes"
+      true1: "True"
+      updated: "Custom attribute updated"
     resources:
       addFirst: "Add first resource"
       created: "Resource created"
@@ -90,6 +102,7 @@ en:
   menu:
     bookings: "Bookings"
     calendar: "Calendar"
+    customAttributes: "Custom attributes"
     resources: "Resources"
     scheduleCategories: "Schedules"
     users: "Users"
