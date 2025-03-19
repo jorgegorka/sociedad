@@ -3,3 +3,9 @@
     = render partial: 'bookings/error', collection: @errors
   - else
     = render partial: 'bookings/resource_booking', collection: @available_resources
+= turbo_stream.update 'custom-attributes' do
+  = render partial: "bookings/custom_attributes/not_available", collection: @custom_attributes[:not_available], as: :not_available
+  = render partial: "bookings/custom_attributes/available", collection: @custom_attributes[:available], as: :available
+= turbo_stream.update 'current-info' do
+  = render "shared/notification", title: I18n.t("bookings.currentInfo", num_bookings: @current_info[0], participants: @current_info[1], schedule_name: @current_info[2])
+

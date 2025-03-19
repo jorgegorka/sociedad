@@ -61,6 +61,7 @@ es:
     allResources: "Cualquier recurso"
     noBookings: "No has hecho ninguna reserva."
     created: "Reserva creada"
+    customAttributes: "Atributos adicionales"
     currentInfo: "Para el horario %{schedule_name} hay un total de %{num_bookings} reservas y %{participants} comensales."
     deleted: "Reserva eliminada"
     name: "Nombre"
@@ -148,7 +149,7 @@ es:
   menu:
     bookings: "Reservas"
     calendar: "Calendario"
-    customAttributes: "Atributo adicional"
+    customAttributes: "Atributos adicionales"
     resources: "Recursos"
     scheduleCategories: "Horarios"
     users: "Usuarios"

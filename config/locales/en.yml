@@ -61,6 +61,7 @@ en:
     allResources: "All resources"
     noBookings: "There is no bookings yet"
     created: "Booking created"
+    customAttributes: "Custom attributes"
     currentInfo: "For %{schedule_name} schedule there are %{num_reservas} bookings with %{participants} diners."
     deleted: "Booking deleted"
     name: "Name"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_17_111403) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_17_120327) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_17_111403) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "booking_custom_attributes", force: :cascade do |t|
+    t.integer "booking_id"
+    t.integer "custom_attribute_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_booking_custom_attributes_on_booking_id"
+    t.index ["custom_attribute_id"], name: "index_booking_custom_attributes_on_custom_attribute_id"
   end
 
   create_table "bookings", force: :cascade do |t|
