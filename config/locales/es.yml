@@ -1,5 +1,17 @@
 es:
   admin:
+    customAttributes:
+      addFirst: "Añade el primer atributo adicional"
+      created: "Atributo adicional creado"
+      deleted: "Atributo adicional eliminado"
+      block: "Bloquear"
+      false1: "No"
+      name: "Nombre"
+      newTitle: "Nuevo atributo adicional"
+      noCustomAttributes: "No hay atributos adicionales todavía"
+      title: "Atributos adicionales"
+      true1: "Sí"
+      updated: "Atributo adicional actualizado"
     resources:
       addFirst: "Añade el primer recurso"
       created: "Recurso creado"
@@ -49,6 +61,7 @@ es:
     allResources: "Cualquier recurso"
     noBookings: "No has hecho ninguna reserva."
     created: "Reserva creada"
+    customAttributes: "Atributos adicionales"
     currentInfo: "Para el horario %{schedule_name} hay un total de %{num_bookings} reservas y %{participants} comensales."
     deleted: "Reserva eliminada"
     name: "Nombre"
@@ -136,6 +149,7 @@ es:
   menu:
     bookings: "Reservas"
     calendar: "Calendario"
+    customAttributes: "Atributos adicionales"
     resources: "Recursos"
     scheduleCategories: "Horarios"
     users: "Usuarios"

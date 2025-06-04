@@ -1,38 +1,48 @@
 class BookingsController < ApplicationController
   before_action :find_booking, only: %i[edit update destroy]
-  before_action :find_schedule_categories, only: %i[new create edit update]
+  before_action :schedule_categories, only: %i[new create edit update]
   before_action :find_resources, only: %i[new create edit update]
   before_action :find_date, only: %i[index]
   before_action :find_bookings, only: %i[index]
-  before_action :current_info, only: %i[new create edit update]
 
   def index
   end
 
   def new
-    @booking = Current.user.bookings.new start_on: booking_date, schedule_category_id: @schedule_categories.first[0]
+    @booking = Current.user.bookings.new start_on: booking_date, schedule_category_id: schedule_categories.first[0]
+    @booking_custom_attributes = @booking.booking_custom_attributes.build
+    @current_info = Bookings::CurrentInfo.new(@booking.start_on, @booking.schedule_category_id, Current.account).call
     available_resources
+    custom_attributes
   end
 
   def create
     @booking =  Current.user.bookings.create booking_params
     if @booking.persisted?
+      Bookings::BookingCustomAttributes.new(@booking, params[:custom_attribute_ids], Current.account).create
       redirect_to bookings_path, notice: t("booking.created")
     else
       available_resources
+      custom_attributes
+       @current_info = Bookings::CurrentInfo.new(@booking.start_on, @booking.schedule_category_id, Current.account).call
       render "new", status: :unprocessable_entity
     end
   end
 
   def edit
+    @current_info = Bookings::CurrentInfo.new(@booking.start_on, @booking.schedule_category_id, Current.account).call
     available_resources
+    custom_attributes
   end
 
   def update
     if @booking.update(booking_params)
+      Bookings::BookingCustomAttributes.new(@booking, params[:custom_attribute_ids], Current.account).update
       redirect_to bookings_path, notice: t("bookings.updated")
     else
       available_resources
+      custom_attributes
+      @current_info = Bookings::CurrentInfo.new(@booking.start_on, @booking.schedule_category_id, Current.account).call
       render "edit", status: :unprocessable_entity
     end
   end
@@ -45,12 +55,15 @@ class BookingsController < ApplicationController
 
   def check
     available_resources
+    custom_attributes
+    @current_info = Bookings::CurrentInfo.new(params[:start_on], params[:booking][:schedule_category_id], Current.account).call
   end
 
   private
 
     def booking_params
-      params.require(:booking).permit(:start_on, :schedule_category_id, :participants, resource_bookings_attributes: %i[resource_id])
+      params.require(:booking).permit(:start_on, :schedule_category_id, :participants,
+         resource_bookings_attributes: %i[resource_id])
     end
 
     def find_booking
@@ -65,6 +78,10 @@ class BookingsController < ApplicationController
       @available_resources, @errors = Bookings::AvailableResources.new(Current.user.id, start_on, schedule_category_id).call
     end
 
+    def custom_attributes
+      @custom_attributes = Bookings::CustomAttributes.new(Current.user, start_on, schedule_category_id).call
+    end
+
     def start_on
       return @booking.start_on if params[:booking].blank? || params[:booking][:start_on].blank?
 
@@ -72,13 +89,11 @@ class BookingsController < ApplicationController
     end
 
     def schedule_category_id
-      return @booking.schedule_category_id if params[:booking].blank? || params[:booking][:schedule_category_id].blank?
-
-      params[:booking][:schedule_category_id]
+      @booking&.schedule_category_id || params.dig(:booking, :schedule_category_id)
     end
 
-    def find_schedule_categories
-      @schedule_categories = Current.account.schedule_categories.pluck(:id, :name)
+    def schedule_categories
+      @schedule_categories ||= Current.account.schedule_categories.pluck(:id, :name)
     end
 
     def find_resources
@@ -86,24 +101,10 @@ class BookingsController < ApplicationController
         .includes(:resource_bookings).order(max_capacity: :desc)
     end
 
-    def current_info
-      @num_bookings = 0
-      @participants = 0
-
-      schedule_category_id = @booking.present? ? @booking.schedule_category_id : @schedule_categories.first[0]
-      @schedule_name = Current.account.schedule_categories.find(schedule_category_id).name
-
-      bookings = Current.account.bookings.where(start_on: booking_date, schedule_category_id:)
-      bookings.each do |booking|
-        @num_bookings += 1
-        @participants += booking.participants
-      end
-    end
-
     def booking_date
-      return Date.current if params[:date].blank?
+      return Date.current if params[:start_on].blank?
 
-      Date.parse params[:date]
+      Date.parse params[:start_on]
     rescue
       Date.current
     end
