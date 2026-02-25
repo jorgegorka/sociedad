@@ -16,7 +16,7 @@ module BookingsHelper
     capacity = 0
 
     available_resources.each do |resource|
-      capacity += resource.max_capacity
+      capacity += resource.max_capacity.to_i
     end
     capacity
   end
@@ -24,16 +24,16 @@ module BookingsHelper
   def translations_for_frontend
     {
       "notEnough": {
-        translation: I18n.t('bookings.assign.notEnough')
+        translation: I18n.t("bookings.assign.notEnough")
       },
       "enough": {
-        translation: I18n.t('bookings.assign.enough')
+        translation: I18n.t("bookings.assign.enough")
       },
       "exceeded": {
-        translation: I18n.t('bookings.assign.exceeded')
+        translation: I18n.t("bookings.assign.exceeded")
       },
       "blocked": {
-        translation: I18n.t('bookings.blocked')
+        translation: I18n.t("bookings.blocked")
       }
     }
   end
