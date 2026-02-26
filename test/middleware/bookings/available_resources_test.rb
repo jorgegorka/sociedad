@@ -79,6 +79,27 @@ class Bookings::AvailableResourcesTest < ActiveSupport::TestCase
     refute_includes errors, I18n.t("bookings.errors.scheduleBlocked")
   end
 
+  test "full day blocked returns error for regular user" do
+    blocked = bookings(:blocked_full_day)
+    _available_resources, errors = Bookings::AvailableResources.new(user2, blocked.start_on, schedule_category.id).call
+
+    assert errors.any? { |e| e.include?(I18n.t("bookings.errors.dayBlocked")) }
+  end
+
+  test "full day blocked does not return error for admin" do
+    blocked = bookings(:blocked_full_day)
+    _available_resources, errors = Bookings::AvailableResources.new(user, blocked.start_on, schedule_category.id).call
+
+    refute errors.any? { |e| e.include?(I18n.t("bookings.errors.dayBlocked")) }
+  end
+
+  test "full day blocked includes blocked_name in error" do
+    blocked = bookings(:blocked_full_day)
+    _available_resources, errors = Bookings::AvailableResources.new(user2, blocked.start_on, schedule_category.id).call
+
+    assert errors.any? { |e| e.include?("Cena de socios") }
+  end
+
   private
 
     def account

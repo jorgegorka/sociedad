@@ -1,6 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :user
-  belongs_to :schedule_category
+  belongs_to :schedule_category, optional: true
 
   has_many :resource_bookings
   has_many :resources, through: :resource_bookings
@@ -10,10 +10,10 @@ class Booking < ApplicationRecord
   normalizes :colour, with: ->(colour) { colour&.downcase }
 
   validates :start_on, presence: true
-  validates :schedule_category_id, presence: true
+  validates :schedule_category_id, presence: true, unless: -> { blocked? && full_day? }
   validates :start_on, comparison: { greater_than_or_equal_to: Date.current }, unless: :current_user_is_admin?
   validates :participants, comparison: { greater_than_or_equal_to: 0 }
-  validates_uniqueness_of :user_id, scope: [ :schedule_category_id, :start_on ], message: ->(_record, _data) { I18n.t('bookings.errors.userTaken') }
+  validates_uniqueness_of :user_id, scope: [ :schedule_category_id, :start_on ], message: ->(_record, _data) { I18n.t('bookings.errors.userTaken') }, unless: -> { blocked? && full_day? }
   validates :colour, inclusion: { in: AVAILABLE_COLOURS }, allow_nil: true
   validate :schedule_not_blocked, on: :create
 
@@ -23,8 +23,9 @@ class Booking < ApplicationRecord
 
   accepts_nested_attributes_for :resource_bookings, allow_destroy: true, reject_if: :all_blank
 
-  scope :for_today, ->(date) { joins(:schedule_category).where(start_on: date) }
+  scope :for_today, ->(date) { left_joins(:schedule_category).where(start_on: date) }
   scope :blocked_for, ->(date, schedule_category_id) { where(start_on: date, schedule_category_id: schedule_category_id, blocked: true) }
+  scope :full_day_blocked_for, ->(date) { where(start_on: date, blocked: true, full_day: true) }
 
   private
 
@@ -34,6 +35,11 @@ class Booking < ApplicationRecord
 
     def schedule_not_blocked
       return if blocked?
+
+      if Current.account&.bookings&.full_day_blocked_for(start_on)&.exists?
+        errors.add(:base, I18n.t("bookings.errors.dayBlocked"))
+        return
+      end
 
       if Current.account&.bookings&.blocked_for(start_on, schedule_category_id)&.exists?
         errors.add(:base, I18n.t("bookings.errors.scheduleBlocked"))

@@ -34,3 +34,11 @@ blocked_booking:
   start_on: <%= Date.current + 10.days %>
   participants: 0
   blocked: true
+
+blocked_full_day:
+  user: admin
+  start_on: <%= Date.current + 15.days %>
+  participants: 0
+  blocked: true
+  full_day: true
+  blocked_name: "Cena de socios"

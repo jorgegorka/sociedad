@@ -7,7 +7,10 @@
   = render partial: "bookings/custom_attributes/not_available", collection: @custom_attributes[:not_available], as: :not_available
   = render partial: "bookings/custom_attributes/available", collection: @custom_attributes[:available], as: :available
 = turbo_stream.update 'bookings-info' do
-  - if @schedule_blocked
+  - if @day_blocked
+    - name_suffix = @blocked_name.present? ? ": #{@blocked_name}" : ""
+    = render "shared/notification", title: I18n.t("bookings.dayBlockedInfo", blocked_name: name_suffix)
+  - elsif @schedule_blocked
     = render "shared/notification", title: I18n.t("bookings.scheduleBlockedInfo", schedule_name: @schedule_name)
   - else
     = render "shared/notification", title: I18n.t("bookings.currentInfo", num_bookings: @num_bookings, participants: @participants, schedule_name: @schedule_name)

@@ -10,8 +10,16 @@ module Bookings
       @num_bookings = 0
       @participants = 0
       @blocked = false
+      @day_blocked = false
+      @blocked_name = nil
 
-      @schedule_name = account.schedule_categories.find(schedule_category_id).name
+      @day_blocked = account.bookings.full_day_blocked_for(start_on).exists?
+      if @day_blocked
+        blocked_booking = account.bookings.full_day_blocked_for(start_on).first
+        @blocked_name = blocked_booking.blocked_name
+      end
+
+      @schedule_name = account.schedule_categories.find_by(id: schedule_category_id)&.name
 
       bookings = account.bookings.where(start_on:, schedule_category_id:)
       bookings.each do |booking|
@@ -20,7 +28,7 @@ module Bookings
         @blocked = true if booking.blocked?
       end
 
-      { num_bookings: @num_bookings, participants: @participants, schedule_name: @schedule_name, blocked: @blocked }
+      { num_bookings: @num_bookings, participants: @participants, schedule_name: @schedule_name, blocked: @blocked, day_blocked: @day_blocked, blocked_name: @blocked_name }
     end
 
     private

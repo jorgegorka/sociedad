@@ -3,7 +3,7 @@ import { post } from "@rails/request.js";
 
 // Connects to data-controller="booking"
 export default class extends Controller {
-  static targets = ["startOn", "participants", "scheduleCategoryId", "message", "blocked", "blockedWarning", "bookingDetails"];
+  static targets = ["startOn", "participants", "scheduleCategoryId", "message", "blocked", "blockedWarning", "bookingDetails", "blockedOptions", "fullDay", "blockedName"];
   static values = { resources: Object, capacity: Number, translations: Object };
 
   connect() {
@@ -94,6 +94,38 @@ export default class extends Controller {
 
     if (this.hasBlockedWarningTarget) {
       this.blockedWarningTarget.classList.toggle("hidden", !isBlocked);
+    }
+
+    if (this.hasBlockedOptionsTarget) {
+      this.blockedOptionsTarget.classList.toggle("hidden", !isBlocked);
+    }
+
+    if (!isBlocked) {
+      if (this.hasFullDayTarget) {
+        this.fullDayTarget.checked = false;
+      }
+      if (this.hasBlockedNameTarget) {
+        this.blockedNameTarget.value = "";
+      }
+      if (this.hasScheduleCategoryIdTarget) {
+        this.scheduleCategoryIdTarget.closest("div").classList.remove("hidden");
+      }
+    }
+  }
+
+  toggleFullDay() {
+    if (!this.hasFullDayTarget) return;
+
+    const isFullDay = this.fullDayTarget.checked;
+
+    if (this.hasScheduleCategoryIdTarget) {
+      this.scheduleCategoryIdTarget.closest(".pt-6").classList.toggle("hidden", isFullDay);
+    }
+
+    if (this.hasBlockedWarningTarget) {
+      if (isFullDay) {
+        this.blockedWarningTarget.classList.remove("hidden");
+      }
     }
   }
 

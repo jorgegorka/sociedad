@@ -1,4 +1,7 @@
-- if result.schedule_blocked.to_i == 1
+- if result.full_day_blocked.to_i == 1
+  %span.text-sm.text-center.text-red-800.font-bold
+    x
+- elsif result.schedule_blocked.to_i == 1
   %span.text-sm.text-center.text-red-800.font-bold
     x
 - else

@@ -19,7 +19,13 @@ class CalendarController < ApplicationController
 
   def create
     if Current.user.admin? && params[:booking][:blocked] == "1"
-      @booking = Bookings::BlockSchedule.new(Current.user, params[:booking][:start_on], params[:booking][:schedule_category_id]).call
+      @booking = Bookings::BlockSchedule.new(
+        Current.user,
+        params[:booking][:start_on],
+        params[:booking][:schedule_category_id],
+        full_day: params[:booking][:full_day] == "1",
+        blocked_name: params[:booking][:blocked_name]
+      ).call
       flash.now[:notice] = t("bookings.blocked_created")
       @day = {
         day: @booking.start_on,
@@ -109,13 +115,23 @@ class CalendarController < ApplicationController
       @participants = info[:participants]
       @schedule_name = info[:schedule_name]
       @schedule_blocked = info[:blocked]
+      @day_blocked = info[:day_blocked]
+      @blocked_name = info[:blocked_name]
     end
 
     def bookings_for_day
       Current.account.bookings
                   .for_today(start_on)
                   .group(:start_on, :schedule_category_id)
-                  .select("bookings.start_on, sum(bookings.participants) as participants, schedule_categories.name as schedule_category_name, schedule_categories.colour as schedule_category_colour, MAX(CASE WHEN bookings.blocked = 1 THEN 1 ELSE 0 END) as schedule_blocked")
+                  .select(
+                    "bookings.start_on",
+                    "sum(bookings.participants) as participants",
+                    "COALESCE(schedule_categories.name, '#{I18n.t("bookings.allSchedules")}') as schedule_category_name",
+                    "COALESCE(schedule_categories.colour, 'red') as schedule_category_colour",
+                    "MAX(CASE WHEN bookings.blocked = 1 THEN 1 ELSE 0 END) as schedule_blocked",
+                    "MAX(CASE WHEN bookings.full_day = 1 THEN 1 ELSE 0 END) as full_day_blocked",
+                    "MAX(bookings.blocked_name) as blocked_name"
+                  )
     end
 
     def current_week_index

@@ -1,6 +1,9 @@
 .space-y-6
   %div{id: "bookings-info"}
-    - if @schedule_blocked
+    - if @day_blocked
+      - name_suffix = @blocked_name.present? ? ": #{@blocked_name}" : ""
+      = render "shared/notification", title: I18n.t("bookings.dayBlockedInfo", blocked_name: name_suffix)
+    - elsif @schedule_blocked
       = render "shared/notification", title: I18n.t("bookings.scheduleBlockedInfo", schedule_name: @schedule_name)
     - else
       = render "shared/notification", title: I18n.t("bookings.currentInfo", num_bookings: @num_bookings, participants: @participants, schedule_name: @schedule_name)
@@ -17,6 +20,13 @@
     .mt-4.flex.items-center.gap-2{data: {booking_target: "blockedToggle"}}
       = f.check_box :blocked, { data: { booking_target: 'blocked', action: 'change->booking#toggleBlocked' }, class: "h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500" }
       = f.label :blocked, t('bookings.blockedSchedule'), class: "text-sm font-medium text-red-700"
+    .mt-2.ml-6.space-y-2.hidden{data: {booking_target: "blockedOptions"}}
+      .flex.items-center.gap-2
+        = f.check_box :full_day, { data: { booking_target: 'fullDay', action: 'change->booking#toggleFullDay' }, class: "h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500" }
+        = f.label :full_day, t('bookings.blockedDay'), class: "text-sm font-medium text-red-700"
+      %div
+        = f.label :blocked_name, t('bookings.blockedNameLabel'), class: "text-sm font-medium text-gray-700"
+        = f.text_field :blocked_name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", data: { booking_target: 'blockedName' }
     %p.mt-1.text-sm.text-red-500.hidden{data: {booking_target: "blockedWarning"}}
       = t('bookings.blockedWarning')
   #booking-details{data: {booking_target: "bookingDetails"}}

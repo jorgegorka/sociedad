@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_19_095925) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_26_165632) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -63,6 +63,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_19_095925) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "blocked", default: false, null: false
+    t.boolean "full_day", default: false, null: false
+    t.string "blocked_name"
     t.index ["schedule_category_id"], name: "index_bookings_on_schedule_category_id"
     t.index ["user_id", "schedule_category_id", "start_on"], name: "idx_on_user_id_schedule_category_id_start_on_0264bf7367", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"

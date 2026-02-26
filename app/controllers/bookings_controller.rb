@@ -18,7 +18,13 @@ class BookingsController < ApplicationController
 
   def create
     if Current.user.admin? && params[:booking][:blocked] == "1"
-      @booking = Bookings::BlockSchedule.new(Current.user, params[:booking][:start_on], params[:booking][:schedule_category_id]).call
+      @booking = Bookings::BlockSchedule.new(
+        Current.user,
+        params[:booking][:start_on],
+        params[:booking][:schedule_category_id],
+        full_day: params[:booking][:full_day] == "1",
+        blocked_name: params[:booking][:blocked_name]
+      ).call
       flash.now[:notice] = t("bookings.blocked_created")
     else
       @booking = Current.user.bookings.create booking_params
@@ -127,6 +133,8 @@ class BookingsController < ApplicationController
       @participants = info[:participants]
       @schedule_name = info[:schedule_name]
       @schedule_blocked = info[:blocked]
+      @day_blocked = info[:day_blocked]
+      @blocked_name = info[:blocked_name]
     end
 
     def find_bookings

@@ -35,10 +35,18 @@ module Bookings
 
       def bookings
         @bookings ||= account.bookings
-        .joins(:schedule_category)
+        .left_joins(:schedule_category)
         .where(start_on: first_day..last_day)
         .group(:start_on, :schedule_category_id)
-        .select("bookings.start_on, sum(bookings.participants) as participants, schedule_categories.name as schedule_category_name, schedule_categories.colour as schedule_category_colour, MAX(CASE WHEN bookings.blocked = 1 THEN 1 ELSE 0 END) as schedule_blocked")
+        .select(
+          "bookings.start_on",
+          "sum(bookings.participants) as participants",
+          "COALESCE(schedule_categories.name, '#{I18n.t("bookings.allSchedules")}') as schedule_category_name",
+          "COALESCE(schedule_categories.colour, 'red') as schedule_category_colour",
+          "MAX(CASE WHEN bookings.blocked = 1 THEN 1 ELSE 0 END) as schedule_blocked",
+          "MAX(CASE WHEN bookings.full_day = 1 THEN 1 ELSE 0 END) as full_day_blocked",
+          "MAX(bookings.blocked_name) as blocked_name"
+        )
       end
 
       def first_day

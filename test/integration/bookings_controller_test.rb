@@ -110,6 +110,45 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, blocked.reload.participants
   end
 
+  test "admin can create a full day blocked booking" do
+    params = { booking: { start_on: 6.days.from_now, blocked: "1", full_day: "1", blocked_name: "Evento especial" } }
+
+    assert_difference "Booking.count" do
+      post bookings_path, params: params, as: :turbo_stream
+    end
+
+    assert_response :success
+    booking = Booking.last
+    assert booking.blocked?
+    assert booking.full_day?
+    assert_nil booking.schedule_category_id
+    assert_equal "Evento especial", booking.blocked_name
+  end
+
+  test "admin can create blocked booking with blocked_name" do
+    schedule_category = schedule_categories(:schedule_category)
+    params = { booking: { start_on: 7.days.from_now, schedule_category_id: schedule_category.id, blocked: "1", blocked_name: "Mantenimiento" } }
+
+    assert_difference "Booking.count" do
+      post bookings_path, params: params, as: :turbo_stream
+    end
+
+    booking = Booking.last
+    assert booking.blocked?
+    refute booking.full_day?
+    assert_equal "Mantenimiento", booking.blocked_name
+  end
+
+  test "admin can destroy a full day blocked booking" do
+    blocked = bookings(:blocked_full_day)
+
+    assert_difference "Booking.count", -1 do
+      delete booking_path(blocked)
+    end
+
+    assert_response :redirect
+  end
+
     private
 
       def booking

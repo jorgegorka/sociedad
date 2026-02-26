@@ -1,6 +1,13 @@
 %li.text-ellipsis.overflow-hidden.whitespace-nowrap
-  = content_tag :span, class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-#{schedule_category_colour}-100 text-#{schedule_category_colour}-800" do
-    - if defined?(schedule_blocked) && schedule_blocked.to_i == 1
-      = "#{schedule_category_name} [#{t('bookings.blocked')}]"
-    - else
+  - if defined?(full_day_blocked) && full_day_blocked.to_i == 1
+    %span.inline-flex.items-center.px-2.py-0.5.rounded.text-xs.font-medium.bg-red-100.text-red-800
+      = defined?(blocked_name) && blocked_name.present? ? blocked_name : t('bookings.blocked')
+  - elsif defined?(schedule_blocked) && schedule_blocked.to_i == 1
+    = content_tag :span, class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-#{schedule_category_colour}-100 text-#{schedule_category_colour}-800" do
+      - if defined?(blocked_name) && blocked_name.present?
+        = "#{schedule_category_name} [#{blocked_name}]"
+      - else
+        = "#{schedule_category_name} [#{t('bookings.blocked')}]"
+  - else
+    = content_tag :span, class: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-#{schedule_category_colour}-100 text-#{schedule_category_colour}-800" do
       = "#{schedule_category_name} #{participants}"

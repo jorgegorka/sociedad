@@ -3,10 +3,13 @@
     = I18n.l(booking.start_on)
   %td{class: td_class.render}
     %ol
-      = render partial: "shared/booking_card", locals: {schedule_category_name: booking.schedule_category.name, schedule_category_colour: booking.schedule_category.colour, participants: nil}
-    - if booking.blocked?
+      - if booking.full_day? && booking.blocked?
+        = render partial: "shared/booking_card", locals: {schedule_category_name: t('bookings.allSchedules'), schedule_category_colour: "red", participants: nil, full_day_blocked: 1, blocked_name: booking.blocked_name}
+      - else
+        = render partial: "shared/booking_card", locals: {schedule_category_name: booking.schedule_category.name, schedule_category_colour: booking.schedule_category.colour, participants: nil}
+    - if booking.blocked? && !booking.full_day?
       %span.inline-flex.items-center.px-2.py-0.5.rounded.text-xs.font-medium.bg-red-100.text-red-800
-        = t('bookings.blocked')
+        = booking.blocked_name.presence || t('bookings.blocked')
   %td{class: td_class.render}
     = link_to bookings_path(user_id: booking.user_id), class: link_class.render do
       = booking.user.name
