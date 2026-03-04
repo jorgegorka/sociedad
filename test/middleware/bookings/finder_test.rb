@@ -7,7 +7,7 @@ class Bookings::FinderTest < ActiveSupport::TestCase
 
     result = Bookings::Finder.new(account, params, dates_range).call
 
-    assert_equal 5, result.count
+    assert_equal 7, result.count
   end
 
   test "filter by resource" do
@@ -25,7 +25,7 @@ class Bookings::FinderTest < ActiveSupport::TestCase
 
     result = Bookings::Finder.new(account, params, dates_range).call
 
-    assert_equal 3, result.count
+    assert_equal 5, result.count
   end
 
   private
